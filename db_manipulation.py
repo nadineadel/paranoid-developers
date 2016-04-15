@@ -1,22 +1,40 @@
 import subprocess
+import pysqlcipher
+from pysqlcipher import dbapi2 as sqlite
+def create_database():
+	conn = sqlite.connect('security1')
+	c = conn.cursor()
+	#c.executescript('pragma key="testing"; pragma kdf_iter=64000;')
+	# c.execute('create table users (username, password, email)')
+	# c.execute('insert into stocks values ("2006-01-05","BUY","RHAT",100,35.14)')
+	conn.commit()
+	c.close()
 def encrypt():
-	command = "/Users/nadineadel/sqlcipher/sqlcipher test.db";
-	attach = "attach database 'encrypted.db' as encrypted key 'test123';";
-	export = "select sqlcipher_export('encrypted');";
-	detach = "DETACH DATABASE encrypted;";
-	# subprocess.Popen("echo Hello World", shell=True, stdout=subprocess.PIPE).stdout.read()
+	print ('encryptt')
+	conn = sqlite.connect('security.db')
+	c = conn.cursor()
+	c.executescript('ATTACH DATABASE "encrypted.db" AS encrypted KEY "my password"')
+	c.executescript('SELECT sqlcipher_export("encrypted")')
+	c.executescript('DETACH DATABASE encrypted')
+	conn.commit()
+	conn.close()
 
-	# 	Runtime rt = Runtime.getRuntime();
-	# 	Process p = rt.exec(command);
-	#     new Thread(new SyncPipe(p.getErrorStream(), System.err)).start();
-	#     new Thread(new SyncPipe(p.getInputStream(), System.out)).start();
-	#     PrintWriter stdin = new PrintWriter(p.getOutputStream());
-	#     stdin.println(attach);
-	#     stdin.println(export);
-	#     stdin.println(detach);
-	#     stdin.println(".quit");
-	#     stdin.close();
-	#     int returnCode = p.waitFor();
-	#     System.out.println("Return code = " + returnCode);
+def  decrypt():
+	print('decrypt')
+	command = "encrypted.db"
+	pragma = "PRAGMA key = 'my password';"
+	attach = "ATTACH DATABASE 'plaintext.db' as plaintext KEY '';"
+	select = "SELECT sqlcipher_export('decrypted');"
+	detach = "DETACH DATABASE plaintext;"
+	conn = sqlite.connect(command)
+	c = conn.cursor()
+	c.executescript(pragma)
+	c.executescript(attach)
+	c.executescript(select)
+	c.executescript(detach)
+	conn.commit()
+	conn.close()
+	
 
-	    # p.destroy();
+if __name__ == "__main__":
+	decrypt()
