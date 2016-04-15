@@ -2,7 +2,7 @@ import subprocess
 import pysqlcipher
 from pysqlcipher import dbapi2 as sqlite
 def create_database():
-	conn = sqlite.connect('security1')
+	conn = sqlite.connect("milestone2.db")
 	c = conn.cursor()
 	#c.executescript('pragma key="testing"; pragma kdf_iter=64000;')
 	# c.execute('create table users (username, password, email)')
@@ -10,17 +10,17 @@ def create_database():
 	conn.commit()
 	c.close()
 def encrypt():
-	print ('encryptt')
-	conn = sqlite.connect('security.db')
+	print ("encryptt")
+	conn = sqlite.connect("milestone2.db")
 	c = conn.cursor()
-	c.executescript('ATTACH DATABASE "encrypted.db" AS encrypted KEY "my password"')
-	c.executescript('SELECT sqlcipher_export("encrypted")')
-	c.executescript('DETACH DATABASE encrypted')
+	c.executescript("ATTACH DATABASE 'encrypted.db' AS encrypted KEY 'my password'")
+	c.executescript("SELECT sqlcipher_export('encrypted')")
+	c.executescript("DETACH DATABASE encrypted")
 	conn.commit()
 	conn.close()
 
 def  decrypt():
-	print('decrypt')
+	print("decrypt")
 	command = "encrypted.db"
 	pragma = "PRAGMA key = 'my password';"
 	attach = "ATTACH DATABASE 'plaintext.db' as plaintext KEY '';"
