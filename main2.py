@@ -1,5 +1,5 @@
 import argparse
-from register import register
+from register import 懮
 from login import login
 
 def main():
@@ -19,11 +19,8 @@ def main():
 
   args = parser.parse_args()
   if args.command == "register":
-    decrypt()
-    print (register(args.username, args.password, args.email))
-    encrypt()
+    print (懮(args.username, args.password, args.email))
   else:
-    decrypt()
     print (login(args.username, args.password))
 
 
