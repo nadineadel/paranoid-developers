@@ -284,8 +284,8 @@ def pyminify(options, files):
         # Convert the tokens from a tuple of tuples to a list of lists so we can
         # update in-place.
         tokens = token_utils.listified_tokenizer(source)
-        print('--', tokens)
-        if not options.nominify: # Perform minification
+        # print('--', tokens)
+        if not options.nominify:  # Perform minification
             source = minification.minify(tokens, options)
             # Convert back to tokens in case we're obfuscating
             tokens = token_utils.listified_tokenizer(source)
@@ -322,8 +322,9 @@ def pyminify(options, files):
             print((
                 "{_file} ({filesize}) reduced to {new_filesize} bytes "
                 "({percent_saved}% of original size)".format(**locals())))
-        #else:
-            #print(result)
+        else:
+            pass
+            # print(result)
         replace.replace(obfuscate.cache, _file)
-        print ('opppppppppppp')
-        replace.replaceargs(_file)
+        # print ('opppppppppppp')
+        replace.replaceargs(options.outfile)
