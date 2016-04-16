@@ -229,7 +229,7 @@ def pyminify(options, files):
                 source = minification.minify(tokens, options)
             # Have to re-tokenize for obfucation (it is quick):
             tokens = token_utils.listified_tokenizer(source)
-            print(tokens)
+            #print(tokens)
             # Perform obfuscation if any of the related options were set
             if name_generator:
                 obfuscate.obfuscate(
@@ -242,8 +242,8 @@ def pyminify(options, files):
             # Convert back to text
             result = ''
             if prepend:
-                print(table)
-                print(tokens)
+                #print(table)
+                #print(tokens)
                 result += prepend
             result += token_utils.untokenize(tokens)
             # Compress it if we were asked to do so
@@ -322,6 +322,8 @@ def pyminify(options, files):
             print((
                 "{_file} ({filesize}) reduced to {new_filesize} bytes "
                 "({percent_saved}% of original size)".format(**locals())))
-        else:
-            print(result)
+        #else:
+            #print(result)
         replace.replace(obfuscate.cache, _file)
+        print ('opppppppppppp')
+        replace.replaceargs(_file)

@@ -1,6 +1,6 @@
 import re
 def catch():
-    with open('register.py') as f:
+    with open('login.py') as f:
         file = f.readlines()
         file2 = []
         r_expression = re.compile('def .*?')

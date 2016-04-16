@@ -1,35 +1,35 @@
 import subprocess
 import pysqlcipher
 from pysqlcipher import dbapi2 as sqlite
-def 俅():
- 뿟=sqlite.connect("milestone2.db")
- c=뿟.cursor()
- 뿟.commit()
+def Ｔ():
+ ڔ=sqlite.connect("milestone2.db")
+ c=ڔ.cursor()
+ ڔ.commit()
  c.close()
-def 컳():
+def ډ():
  print("encryptt")
- 뿟=sqlite.connect("milestone2.db")
- c=뿟.cursor()
+ ڔ=sqlite.connect("milestone2.db")
+ c=ڔ.cursor()
  c.executescript("ATTACH DATABASE 'milestone2.db' AS encrypted KEY 'my password'")
  c.executescript("SELECT sqlcipher_export('encrypted')")
  c.executescript("DETACH DATABASE encrypted")
- 뿟.commit()
- 뿟.close()
-def 橎():
+ ڔ.commit()
+ ڔ.close()
+def 㥒():
  print("decrypt")
- 冽="encrypted.db"
- ڷ="PRAGMA key = 'my password';"
- ﭧ="ATTACH DATABASE 'plaintext.db' as plaintext KEY '';"
- ޏ="SELECT sqlcipher_export('decrypted');"
- ﱙ="DETACH DATABASE plaintext;"
- 뿟=sqlite.connect(冽)
- c=뿟.cursor()
- c.executescript(ڷ)
- c.executescript(ﭧ)
- c.executescript(ޏ)
- c.executescript(ﱙ)
- 뿟.commit()
- 뿟.close()
+ ﻦ="encrypted.db"
+ ݥ="PRAGMA key = 'my password';"
+ ﲀ="ATTACH DATABASE 'plaintext.db' as plaintext KEY '';"
+ ﱄ="SELECT sqlcipher_export('decrypted');"
+ ܥ="DETACH DATABASE plaintext;"
+ ڔ=sqlite.connect(ﻦ)
+ c=ڔ.cursor()
+ c.executescript(ݥ)
+ c.executescript(ﲀ)
+ c.executescript(ﱄ)
+ c.executescript(ܥ)
+ ڔ.commit()
+ ڔ.close()
 if __name__=="__main__":
- 橎()
+ 㥒()
 # Created by pyminifier (https://github.com/liftoff/pyminifier)
