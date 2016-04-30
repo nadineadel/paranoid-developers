@@ -17,7 +17,7 @@ def encrypt():
   print ("encryptt")
   conn = sqlite.connect("milestone2.db")
   c = conn.cursor()
-  c.executescript("ATTACH DATABASE 'milestone2.db' AS encrypted KEY 'my password'")
+  c.executescript("ATTACH DATABASE 'encrypted.db' AS encrypted KEY 'my password'")
   c.executescript("SELECT sqlcipher_export('encrypted')")
   c.executescript("DETACH DATABASE encrypted")
   conn.commit()
@@ -29,7 +29,7 @@ def decrypt():
   command = "encrypted.db"
   pragma = "PRAGMA key = 'my password';"
   attach = "ATTACH DATABASE 'plaintext.db' as plaintext KEY '';"
-  select = "SELECT sqlcipher_export('decrypted');"
+  select = "SELECT sqlcipher_export('plaintext');"
   detach = "DETACH DATABASE plaintext;"
   conn = sqlite.connect(command)
   c = conn.cursor()

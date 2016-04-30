@@ -32,7 +32,6 @@ def main():
   parser_deactivate.add_argument("password", metavar="password", type=str,   help="password")
 
   args = parser.parse_args()
-  # decrypt()
   if args.command == "register":
     print (register(args.username, args.password, args.email))
   elif args.command == "login":
@@ -41,8 +40,6 @@ def main():
     print (update(args.username, args.type, args.change))
   elif args.command == "deactivate":
     print (deactivate(args.username, args.password))
-
-
 
 
 if __name__ == "__main__":
