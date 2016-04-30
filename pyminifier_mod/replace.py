@@ -50,5 +50,5 @@ def replaceargs(filename):
       else:
           file2.append(currentline)
       counter += 1
-    with open('minified/' + filename, 'w') as x:
+    with open(filename, 'w') as x:
         x.write(''.join(file2))
